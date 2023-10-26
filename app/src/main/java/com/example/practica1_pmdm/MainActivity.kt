@@ -11,9 +11,8 @@ class MainActivity : AppCompatActivity() {
 
     var EDR: Int = 0
     var contador: Int = 0
-    lateinit var buttonReturn: Button
-    lateinit var buttonIraActivityPrimos: Button
-    lateinit var buttonReturnX: Button
+    lateinit var buttonPrimo: Button
+    lateinit var buttonPrimoX: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,16 +23,16 @@ class MainActivity : AppCompatActivity() {
         Log.i("ESTADOS", "Creando actividad:" + contador)
         Log.i("ESTADOS", "Evento onCreate:" + contador)
 
-        buttonReturn = findViewById(R.id.buttonReturn)
-        buttonReturn.setOnClickListener {
+        buttonPrimo = findViewById(R.id.buttonPrimo)
+        buttonPrimo.setOnClickListener {
             val intent = Intent(this, ANB_numPrimos::class.java)
             intent.putExtra("numero", 15)
             startActivityForResult(intent, 1)
         }
 
-        buttonReturnX = findViewById(R.id.buttonReturnX)
+        buttonPrimoX = findViewById(R.id.buttonPrimoX)
 
-        buttonReturnX.setOnClickListener {
+        buttonPrimoX.setOnClickListener {
             val intent = Intent(this, ANB_primosXActivity::class.java)
             intent.putExtra("numero", 10)
             edrPrimosResultLauncher.launch(intent)
