@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Practica1_PMDM"
         tools:targetApi="31">
+        <service
+            android:name="Servicios.PrimoService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity
+            android:name="Servicios.ServiciosPrimos"
+            android:configChanges="orientation"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ANB_primosXActivity"
             android:exported="false" />
