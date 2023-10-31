@@ -16,24 +16,16 @@ class ServiciosPrimos : AppCompatActivity() {
 
     lateinit var boton1 : Button
     lateinit var boton2 : Button
-    var enabled : Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_servicios_primos)
 
         //Iniciar servicio
 
-        if(enabled){
-            val serviceIntent = Intent(this, PrimosService::class.java)
-            serviceIntent.putExtra("inputExta", 20)
-            ContextCompat.startForegroundService(this, serviceIntent)
-
-            enabled = true
-        }
-        else{
-            enabled = false
-        }
-
+        val serviceIntent = Intent(this, PrimosService::class.java)
+        serviceIntent.putExtra("inputExta", 20)
+        ContextCompat.startForegroundService(this, serviceIntent)
 
 
         //Botones
