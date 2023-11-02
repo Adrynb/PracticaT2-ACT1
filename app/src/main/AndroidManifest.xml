@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,14 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Practica1_PMDM"
         tools:targetApi="31">
-
-        <service android:name="Servicios.NumeroPrimoServicio"
-            android:exported="true"
-            android:enabled="true">
-        </service>
+        <service
+            android:name="Servicios.PrimoSecondService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name="Servicios.PrimoService"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity
-            android:name="Servicios.ServiciosPrimos"
+            android:name="Servicios.ServiciosActivity"
             android:configChanges="orientation"
             android:exported="true">
             <intent-filter>

@@ -5,12 +5,13 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import com.example.practica1_pmdm.ANB_numPrimos
 import com.example.practica1_pmdm.R
 import kotlin.random.Random
 
 
-class ServiciosPrimos : AppCompatActivity() {
+class ServiciosActivity : AppCompatActivity() {
 
     lateinit var boton1 : Button
     lateinit var boton2 : Button
@@ -21,8 +22,10 @@ class ServiciosPrimos : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_servicios_primos)
 
-        val serviceIntent = Intent(this, NumeroPrimoServicio::class.java)
+        val serviceIntent = Intent(this, PrimoService::class.java)
         startService(serviceIntent)
+        ContextCompat.startForegroundService(this, serviceIntent)
+
 
         val randomColor = Random
         val color = Color.argb(255, randomColor.nextInt(), randomColor.nextInt(256), randomColor.nextInt(256))
