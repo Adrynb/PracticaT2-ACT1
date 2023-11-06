@@ -16,17 +16,31 @@ class ServiciosActivity : AppCompatActivity() {
     lateinit var boton1 : Button
     lateinit var boton2 : Button
     lateinit var botonServicio : Button
-
+    private var enable: Boolean = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_servicios_primos)
 
-        val serviceIntent = Intent(this, PrimoService::class.java)
-        startService(serviceIntent)
-        ContextCompat.startForegroundService(this, serviceIntent)
+        //Primer Plano
+        if(!enable){
+            val serviceIntent = Intent(this, PrimoService::class.java)
+            startService(serviceIntent)
+            ContextCompat.startForegroundService(this, serviceIntent)
+            enable = true
+        }
+        else{
+            enable = false
+            val serviceIntent = Intent(this, PrimoService::class.java)
+            stopService(serviceIntent)
+        }
 
+        /*
+        Segundo Plano
+        val secondServiceIntent = Intent(this, PrimoSecondService::class.java)
+        startService(secondServiceIntent)
 
+*/
         val randomColor = Random
         val color = Color.argb(255, randomColor.nextInt(), randomColor.nextInt(256), randomColor.nextInt(256))
 
