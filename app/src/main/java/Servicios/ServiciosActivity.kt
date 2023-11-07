@@ -41,6 +41,11 @@ class ServiciosActivity : AppCompatActivity() {
         startService(secondServiceIntent)
 
 */
+        //IntentService
+
+        val intentService = Intent(this, MyIntentService::class.java)
+        startService(intentService)
+
         val randomColor = Random
         val color = Color.argb(255, randomColor.nextInt(), randomColor.nextInt(256), randomColor.nextInt(256))
 
