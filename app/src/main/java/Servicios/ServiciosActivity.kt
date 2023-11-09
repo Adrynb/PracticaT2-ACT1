@@ -22,7 +22,7 @@ class ServiciosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_servicios_primos)
 
-        //Primer Plano
+        /*
         if(!enable){
             val serviceIntent = Intent(this, PrimoService::class.java)
             startService(serviceIntent)
@@ -34,6 +34,7 @@ class ServiciosActivity : AppCompatActivity() {
             val serviceIntent = Intent(this, PrimoService::class.java)
             stopService(serviceIntent)
         }
+        */
 
         /*
         Segundo Plano
