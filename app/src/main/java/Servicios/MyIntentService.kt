@@ -21,8 +21,30 @@ private const val EXTRA_PARAM2 = "Servicios.extra.PARAM2"
  class MyIntentService : IntentService("MyIntentService") {
     private val CHANNEL_ID = "MyIntentServiceChannel"
     private val NOTIFICATION_ID = 1
-    private lateinit var manager: NotificationManager
-    private val notificationId = 102
+     private lateinit var manager: NotificationManager
+     private val notificationId = 102
+
+     override fun onCreate() {
+         super.onCreate()
+
+         manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             createNotificationChannel()
+         }
+     }
+
+     private fun createNotificationChannel() {
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             val serviceChannel = NotificationChannel(
+                 CHANNEL_ID,
+                 "Numeros Primos Canal de Servicio",
+                 NotificationManager.IMPORTANCE_DEFAULT
+             )
+             manager = getSystemService(NotificationManager::class.java)
+             manager.createNotificationChannel(serviceChannel)
+         }
+     }
 
      override fun onHandleIntent(p0: Intent?) {
          val maxNumber = Integer.MAX_VALUE / 40000
