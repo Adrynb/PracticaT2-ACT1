@@ -1,11 +1,19 @@
 
 package Servicios
+
+import PrimeWork
 import android.content.Intent
 import android.graphics.Color
+import androidx.lifecycle.Observer
+import androidx.work.WorkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import com.example.practica1_pmdm.ANB_numPrimos
 import com.example.practica1_pmdm.R
 import kotlin.random.Random
@@ -22,6 +30,8 @@ class ServiciosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_servicios_primos)
 
+        //Primer Plano
+
         /*
         if(!enable){
             val serviceIntent = Intent(this, PrimoService::class.java)
@@ -36,16 +46,39 @@ class ServiciosActivity : AppCompatActivity() {
         }
         */
 
+       //Segundo plano
+
         /*
-        Segundo Plano
         val secondServiceIntent = Intent(this, PrimoSecondService::class.java)
         startService(secondServiceIntent)
+         */
 
-*/
+
         //IntentService
 
+        /*
         val intentService = Intent(this, MyIntentService::class.java)
         startService(intentService)
+        */
+
+
+        //WorkerManager
+        val workerManager : WorkManager = WorkManager.getInstance(this)
+        val workRequest = OneTimeWorkRequest.Builder(PrimeWork::class.java).build() //No me lo detectaba con el ejemplo de los apuntes, ademas esto resume un parrafaco xD
+        workerManager.enqueue(workRequest)
+
+        workerManager.getWorkInfoByIdLiveData(workRequest.id)
+            .observe(this, Observer { workInfo ->
+                if (workInfo != null && workInfo.state.isFinished) {
+                    val primosArray = workInfo.outputData.getIntArray("primos")
+                    if (primosArray != null) {
+                        for (primo in primosArray) {
+                            Log.d("PrimeNumbers", "Número primo: $primo")
+                        }
+                    }
+                }
+            })
+
 
         val randomColor = Random
         val color = Color.argb(255, randomColor.nextInt(), randomColor.nextInt(256), randomColor.nextInt(256))

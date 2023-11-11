@@ -17,9 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Practica1_PMDM"
         tools:targetApi="31">
+        <activity
+            android:name="Servicios.PrimeWorkerManager"
+            android:exported="false" />
+
         <service
             android:name="Servicios.MyIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
         <service
             android:name="Servicios.PrimoIntentService"
             android:exported="false" />
