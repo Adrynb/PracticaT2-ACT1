@@ -11,40 +11,134 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="126dp"
+        android:layout_marginTop="23dp"
         android:layout_marginEnd="156dp"
-        android:layout_marginBottom="17dp"
         android:text="Boton1"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="17dp"
         android:layout_marginEnd="156dp"
-        android:layout_marginBottom="492dp"
+        android:layout_marginBottom="32dp"
         android:text="Boton2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.014" />
 
     <Button
-        android:id="@+id/service"
+        android:id="@+id/primoService"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="151dp"
         android:layout_marginBottom="416dp"
-        android:text="Servicio"
+        android:text="PrimerServicio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.627"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/secondService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="127dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="354dp"
+        android:text="SegundoServicio"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/intentService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="290dp"
+        android:text="IntentService"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/secondService" />
+
+    <Button
+        android:id="@+id/workManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="230dp"
+        android:text="WorkManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/intentService" />
+
+    <Button
+        android:id="@+id/eventBus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="168dp"
+        android:text="EventBus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workManager" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="127dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="147dp"
+        android:layout_marginEnd="137dp"
+        android:autoText="false"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:text="SERVICIOS"
+        app:layout_constraintBottom_toTopOf="@+id/primoService"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="127dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="149dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="135dp"
+        android:layout_marginBottom="224dp"
+        android:autoText="false"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:text="ACTIVIDADES"
+        app:layout_constraintBottom_toTopOf="@+id/primoService"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

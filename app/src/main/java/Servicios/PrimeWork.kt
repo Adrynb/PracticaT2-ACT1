@@ -26,13 +26,12 @@ class PrimeWork(
 
     init {
         createNotificationChannel()
-        EventBus.getDefault().register(this)
     }
 
     override fun doWork(): Result {
         return try {
             showResultNotification("Primo realizado con éxito")
-            Result.success(realizarTrabajo())
+            Result.success(doPrimeNumbers())
         } catch (e: Exception) {
             Log.e("PrimeWorkerManager", "Error al realizar el trabajo", e)
             Result.failure()
@@ -50,7 +49,7 @@ class PrimeWork(
         manager.notify(notificationId, notification)
     }
 
-    private fun realizarTrabajo(): Data {
+    private fun doPrimeNumbers(): Data {
         val maxNumber = Integer.MAX_VALUE / 40000
         val primeNumbers = calPrimos(maxNumber)
 

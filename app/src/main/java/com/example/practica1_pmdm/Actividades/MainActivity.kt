@@ -1,4 +1,4 @@
-package com.example.practica1_pmdm
+package com.example.practica1_pmdm.Actividades
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.practica1_pmdm.R
 
 class MainActivity : AppCompatActivity() {
 

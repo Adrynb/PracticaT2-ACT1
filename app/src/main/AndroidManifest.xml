@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
 
     <application
         android:allowBackup="true"
@@ -54,13 +56,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ANB_primosXActivity"
+            android:name=".Actividades.ANB_primosXActivity"
             android:exported="false" />
         <activity
-            android:name=".ANB_numPrimos"
+            android:name=".Actividades.ANB_numPrimos"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Actividades.MainActivity"
             android:configChanges="orientation"
             android:exported="true">
             <intent-filter>
