@@ -29,7 +29,7 @@ class PrimeWorkBus(
 
     init {
         createNotificationChannel()
-        EventBus.getDefault().register(this)
+        EventBus.getDefault().register(this) //Registra la clase
     }
 
     override fun doWork(): Result {
@@ -42,7 +42,7 @@ class PrimeWorkBus(
 
             val primeNumbersString = buildPrimeNumbersString(primeNumbers)
 
-            EventBus.getDefault().post(primeNumbersString)
+            EventBus.getDefault().post(primeNumbersString) //Lo manda
 
             return Result.success()
         } catch (e: Exception) {
