@@ -11,18 +11,21 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.practica1_pmdm.R
 import org.greenrobot.eventbus.EventBus
-
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import kotlin.math.sqrt
 
-class PrimeWork(
+class PrimeWorkBus(
     context: Context,
     params: WorkerParameters
 ) : Worker(context, params) {
 
-    private val notificationId = 105
+    private val notificationId = 107
     private val CHANNEL_ID = "WorkerManagerClass"
     private val manager: NotificationManager =
         applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    private var numerosPrimos: ArrayList<Int> = ArrayList()
 
     init {
         createNotificationChannel()
@@ -30,19 +33,31 @@ class PrimeWork(
     }
 
     override fun doWork(): Result {
-        return try {
-            showResultNotification("Primo realizado con éxito")
-            Result.success(realizarTrabajo())
+        try {
+            val outputData = doPrimeNumbers()
+
+            val primeNumbers = outputData.getIntArray("primos")?.toList() ?: emptyList()
+
+            showResultNotification(primeNumbers)
+
+            val primeNumbersString = buildPrimeNumbersString(primeNumbers)
+
+            EventBus.getDefault().post(primeNumbersString)
+
+            return Result.success()
         } catch (e: Exception) {
-            Log.e("PrimeWorkerManager", "Error al realizar el trabajo", e)
-            Result.failure()
+            Log.e("PrimeWorkBus", "Error al realizar el trabajo", e)
+            return Result.failure()
         }
     }
 
-    private fun showResultNotification(resultadosImprimir: String) {
+    private fun showResultNotification(primeNumbers: List<Int>) {
+
+        val primeNumbersString = buildPrimeNumbersString(primeNumbers)
+
         val notification: Notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setContentTitle("PrimeService (WorkerManager)")
-            .setContentText(resultadosImprimir)
+            .setContentText(primeNumbersString)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
@@ -50,18 +65,27 @@ class PrimeWork(
         manager.notify(notificationId, notification)
     }
 
-    private fun realizarTrabajo(): Data {
-        val maxNumber = Integer.MAX_VALUE / 40000
-        val primeNumbers = calPrimos(maxNumber)
+    private fun buildPrimeNumbersString(primeNumbers: List<Int>): String {
+        val stringBuilder = StringBuilder()
+        for (prime in primeNumbers) {
+            stringBuilder.append("$prime, ")
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length - 2)
+        return stringBuilder.toString()
+    }
 
-        for (primo in primeNumbers) {
+    private fun doPrimeNumbers(): Data {
+        val maxNumber = 1000
+        numerosPrimos = calPrimos(maxNumber)
+
+        for (primo in numerosPrimos) {
             Log.d("PrimeNumbers", "Número primo: $primo")
         }
 
-        Log.d("PrimeWorkerManager", "Trabajo realizado con éxito")
+        Log.d("PrimeWorkBus", "Trabajo realizado con éxito")
 
         val outputData = Data.Builder()
-            .putIntArray("primos", primeNumbers.toIntArray())
+            .putIntArray("primos", numerosPrimos.toIntArray())
             .build()
 
         return outputData
@@ -100,4 +124,14 @@ class PrimeWork(
         return true
     }
 
+    fun getNumerosPrimos(): ArrayList<Int> {
+        return numerosPrimos
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(primeNumbers: List<Int>) {
+        Log.d("Bus Evento", primeNumbers.joinToString())
+    }
+
 }
+

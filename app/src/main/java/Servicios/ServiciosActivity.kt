@@ -1,7 +1,6 @@
 
 package Servicios
 
-import PrimeWork
 import android.content.Intent
 import android.graphics.Color
 import androidx.lifecycle.Observer
@@ -16,6 +15,9 @@ import androidx.work.WorkManager
 import androidx.work.WorkRequest
 import com.example.practica1_pmdm.ANB_numPrimos
 import com.example.practica1_pmdm.R
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import kotlin.random.Random
 
 
@@ -54,6 +56,7 @@ class ServiciosActivity : AppCompatActivity() {
          */
 
 
+
         //IntentService
 
         /*
@@ -63,8 +66,10 @@ class ServiciosActivity : AppCompatActivity() {
 
 
         //WorkerManager
-        val workerManager : WorkManager = WorkManager.getInstance(this)
-        val workRequest = OneTimeWorkRequest.Builder(PrimeWork::class.java).build() //No me lo detectaba con el ejemplo de los apuntes, ademas esto resume un parrafaco xD
+
+        /*
+              val workerManager : WorkManager = WorkManager.getInstance(this)
+        val workRequest = OneTimeWorkRequest.Builder(PrimeWork::class.java).build()
         workerManager.enqueue(workRequest)
 
         workerManager.getWorkInfoByIdLiveData(workRequest.id)
@@ -78,6 +83,14 @@ class ServiciosActivity : AppCompatActivity() {
                     }
                 }
             })
+         */
+
+        //EventBus
+        val intent = Intent(this, PrimeWorkBus::class.java)
+        val workManager: WorkManager = WorkManager.getInstance(this)
+        val workRequest = OneTimeWorkRequest.Builder(PrimeWorkBus::class.java).build()
+        workManager.enqueue(workRequest)
+
 
 
         val randomColor = Random
@@ -100,6 +113,21 @@ class ServiciosActivity : AppCompatActivity() {
             intent.putExtra("numero", 20)
             startActivityForResult(intent, 1)
         }
+
+    }
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: PrimeWorkBus) {
+        val numerosPrimos = event.getNumerosPrimos()
 
     }
 }
